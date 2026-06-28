@@ -4,7 +4,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://gta6-fansite.pages.dev',
+  site: 'https://hubgta6.com',
+  server: {
+    allowedHosts: ['.loca.lt', '.trycloudflare.com'],
+  },
   vite: {
     plugins: [tailwindcss()],
   },

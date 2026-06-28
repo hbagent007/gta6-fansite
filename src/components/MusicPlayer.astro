@@ -1,0 +1,161 @@
+---
+// Floating music player — corner widget, loops continuously
+// Supports .m4a (AAC/ALAC) and .mp3
+---
+
+<!-- Auto-play toast (appears after 3 seconds) -->
+<div id="music-toast" class="fixed bottom-24 right-6 z-50 opacity-0 translate-y-4 transition-all duration-500 pointer-events-none">
+  <div class="glass rounded-2xl px-4 py-3 border border-neon-pink/30 shadow-lg flex items-center gap-3 cursor-pointer whitespace-nowrap" onclick="window.__startMusic?.()">
+    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-neon-pink to-neon-purple flex items-center justify-center animate-pulse-glow">
+      <i class="fa-solid fa-music text-white text-xs"></i>
+    </div>
+    <div>
+      <p class="text-sm font-medium text-white">🎵 Click anywhere to start the vibe</p>
+    </div>
+  </div>
+</div>
+
+<!-- Mini player card -->
+<div id="music-card" class="fixed bottom-6 right-6 z-50">
+  <div id="music-player-popup" class="glass rounded-2xl p-3 flex items-center gap-3 shadow-xl border border-white/10 opacity-0 translate-y-4 scale-90 transition-all duration-300 pointer-events-none mb-2" style="transform-origin: bottom right;">
+    <button id="music-play-btn" class="w-10 h-10 rounded-full bg-gradient-to-br from-neon-pink to-neon-purple flex items-center justify-center shrink-0 hover:scale-110 transition-all cursor-pointer" title="Play / Pause">
+      <i id="play-icon" class="fa-solid fa-play text-white text-sm ml-0.5"></i>
+    </button>
+    <div class="min-w-0 flex-1">
+      <p class="text-xs font-medium text-white truncate max-w-[130px]">GTA 6</p>
+      <p class="text-[10px] text-muted truncate">Larry & Bird · Andy Mineo</p>
+      <div class="flex items-center gap-1.5 mt-1">
+        <i class="fa-solid fa-volume-low text-[8px] text-muted"></i>
+        <input id="volume-slider" type="range" min="0" max="100" value="30" class="w-16 h-1 appearance-none bg-white/10 rounded-full cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2.5 [&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-neon-pink" />
+        <i class="fa-solid fa-volume-high text-[8px] text-muted"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main toggle button -->
+  <button id="music-toggle" class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-pink to-neon-purple flex items-center justify-center shadow-lg glow-pink hover:scale-110 transition-all cursor-pointer" title="Toggle background music">
+    <i id="toggle-icon" class="fa-solid fa-music text-white text-lg"></i>
+  </button>
+</div>
+
+<!-- Hidden audio element -->
+<audio id="bg-music" loop preload="none">
+  <source src="/gta6-song.m4a" type="audio/mp4" />
+  <source src="/gta6-song.mp3" type="audio/mpeg" />
+</audio>
+
+<script>
+  (function() {
+    const audio = document.getElementById('bg-music');
+    const toggle = document.getElementById('music-toggle');
+    const toggleIcon = document.getElementById('toggle-icon');
+    const playBtn = document.getElementById('music-play-btn');
+    const playIcon = document.getElementById('play-icon');
+    const popup = document.getElementById('music-player-popup');
+    const volumeSlider = document.getElementById('volume-slider');
+    const toast = document.getElementById('music-toast');
+
+    let isPlaying = false;
+    let hasStarted = false;
+    let fadeInterval = null;
+
+    function startMusic() {
+      if (hasStarted) return;
+      hasStarted = true;
+
+      // Hide toast
+      toast.classList.add('opacity-0', 'translate-y-4');
+      toast.classList.remove('opacity-100', 'translate-y-0');
+
+      audio.volume = 0.05;
+      audio.play().then(() => {
+        // Fade in
+        fadeInterval = setInterval(() => {
+          if (audio.volume < 0.3) {
+            audio.volume = Math.min(audio.volume + 0.025, 0.3);
+          } else {
+            clearInterval(fadeInterval);
+          }
+        }, 150);
+
+        isPlaying = true;
+        toggleIcon.className = 'fa-solid fa-pause text-white text-lg';
+        if (playIcon) playIcon.className = 'fa-solid fa-pause text-white text-sm ml-0.5';
+
+        // Show player card
+        popup.classList.remove('opacity-0', 'translate-y-4', 'scale-90', 'pointer-events-none');
+        popup.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+      }).catch(() => {
+        // Autoplay blocked — show toast and wait for click
+        hasStarted = false;
+      });
+    }
+
+    function stopMusic() {
+      audio.pause();
+      isPlaying = false;
+      toggleIcon.className = 'fa-solid fa-music text-white text-lg';
+      if (playIcon) playIcon.className = 'fa-solid fa-play text-white text-sm ml-0.5';
+    }
+
+    // 🔥 Auto-play attempt after 1 second delay
+    setTimeout(() => {
+      startMusic();
+      // If autoplay failed, show the toast after another 2 seconds
+      setTimeout(() => {
+        if (!hasStarted) {
+          toast.classList.remove('opacity-0', 'translate-y-4');
+          toast.classList.add('opacity-100', 'translate-y-0');
+        }
+      }, 2000);
+    }, 1000);
+
+    // Global click handler — starts music on ANY page click if not playing
+    window.__startMusic = () => {
+      if (!isPlaying) {
+        startMusic();
+      }
+    };
+    document.addEventListener('click', window.__startMusic, { once: false });
+    // Remove the global listener once music starts, to keep it clean
+    document.addEventListener('click', () => {
+      if (isPlaying) {
+        document.removeEventListener('click', window.__startMusic);
+      }
+    });
+
+    // Main toggle button
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isPlaying) {
+        stopMusic();
+        popup.classList.add('opacity-0', 'translate-y-4', 'scale-90', 'pointer-events-none');
+        popup.classList.remove('opacity-100', 'translate-y-0', 'scale-100');
+      } else {
+        startMusic();
+      }
+    });
+
+    // Play/Pause inside card
+    playBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isPlaying) {
+        stopMusic();
+      } else {
+        startMusic();
+      }
+    });
+
+    // Volume slider
+    volumeSlider.addEventListener('input', () => {
+      audio.volume = volumeSlider.value / 100;
+    });
+
+    // Handle audio end
+    audio.addEventListener('ended', () => {
+      isPlaying = false;
+      toggleIcon.className = 'fa-solid fa-music text-white text-lg';
+      if (playIcon) playIcon.className = 'fa-solid fa-play text-white text-sm ml-0.5';
+    });
+  })();
+</script>
