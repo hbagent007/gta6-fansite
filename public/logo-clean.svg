@@ -6,17 +6,12 @@
     </linearGradient>
     <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:#ff1493"/>
-      <stop offset="40%" style="stop-color:#ff1493"/>
-      <stop offset="70%" style="stop-color:#b84dff"/>
-      <stop offset="100%" style="stop-color:#00f0ff"/>
-    </linearGradient>
-    <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#ff1493"/>
-      <stop offset="50%" style="stop-color:#b84dff"/>
+      <stop offset="35%" style="stop-color:#ff1493"/>
+      <stop offset="65%" style="stop-color:#b84dff"/>
       <stop offset="100%" style="stop-color:#00f0ff"/>
     </linearGradient>
     <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feGaussianBlur stdDeviation="4" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -35,24 +30,24 @@
   <rect width="400" height="400" rx="80" fill="url(#bgGrad)" stroke="rgba(255,20,147,0.15)" stroke-width="2"/>
 
   <!-- Ambient glow -->
-  <circle cx="120" cy="120" r="100" fill="#ff1493" opacity="0.06" filter="url(#glowBig)"/>
-  <circle cx="280" cy="280" r="100" fill="#00f0ff" opacity="0.06" filter="url(#glowBig)"/>
+  <circle cx="100" cy="100" r="120" fill="#ff1493" opacity="0.05" filter="url(#glowBig)"/>
+  <circle cx="300" cy="300" r="120" fill="#00f0ff" opacity="0.05" filter="url(#glowBig)"/>
 
-  <!-- GTA VI - Large, bold, clean -->
-  <text x="200" y="210" text-anchor="middle" font-family="'Poppins','Segoe UI',sans-serif" font-size="64" font-weight="900" fill="url(#textGrad)" letter-spacing="4" filter="url(#glow)">
+  <!-- GTA VI -->
+  <text x="200" y="215" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="72" font-weight="600" fill="url(#textGrad)" letter-spacing="5" filter="url(#glow)">
     GTA VI
   </text>
 
-  <!-- hub - below, lighter -->
-  <text x="200" y="260" text-anchor="middle" font-family="'Inter','Segoe UI',sans-serif" font-size="34" font-weight="300" fill="#8888bb" letter-spacing="10" filter="url(#glow)">
+  <!-- hub -->
+  <text x="200" y="270" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="34" font-weight="400" fill="#9999bb" letter-spacing="12" filter="url(#glow)">
     HUB
   </text>
 
-  <!-- Accent line -->
-  <line x1="140" y1="275" x2="260" y2="275" stroke="url(#accentLine)" stroke-width="1.5" opacity="0.6"/>
+  <!-- Line -->
+  <line x1="135" y1="240" x2="265" y2="240" stroke="url(#textGrad)" stroke-width="1.5" opacity="0.35"/>
 
-  <!-- Decorative dots -->
-  <circle cx="170" cy="300" r="3" fill="#ff1493" opacity="0.8"/>
-  <circle cx="200" cy="305" r="3" fill="#b84dff" opacity="0.8"/>
-  <circle cx="230" cy="300" r="3" fill="#00f0ff" opacity="0.8"/>
+  <!-- Dots -->
+  <circle cx="168" cy="310" r="3.5" fill="#ff1493"/>
+  <circle cx="200" cy="317" r="3.5" fill="#b84dff"/>
+  <circle cx="232" cy="310" r="3.5" fill="#00f0ff"/>
 </svg>
