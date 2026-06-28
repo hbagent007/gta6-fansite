@@ -138,6 +138,25 @@ CREATE OR REPLACE TRIGGER on_auth_user_created
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
 -- ===================================================
+-- Early Access Launch Program
+-- ===================================================
+CREATE TABLE public.launch_registrations (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE,
+  email TEXT NOT NULL,
+  claimed_premium BOOLEAN DEFAULT false,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Function to count remaining spots
+CREATE OR REPLACE FUNCTION remaining_launch_spots()
+RETURNS INT AS $$
+BEGIN
+  RETURN GREATEST(0, 500 - (SELECT COUNT(*) FROM public.launch_registrations));
+END;
+$$ LANGUAGE plpgsql;
+
+-- ===================================================
 -- SEED DATA: Forum Categories
 -- ===================================================
 INSERT INTO public.forum_categories (name, slug, description, min_tier, sort_order) VALUES

@@ -5,6 +5,38 @@ import { TIERS } from "../../lib/tiers";
 
 <BaseLayout title="Membership" description="Join hubgta6.com with free, premium, or elite membership. Get access to exclusive guides, maps, and community features.">
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+    <!-- Launch Offer Banner -->
+    <div class="text-center mb-8">
+      <div class="inline-block bg-gradient-to-r from-neon-pink/20 via-neon-purple/20 to-neon-cyan/20 border border-neon-pink/30 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,20,147,0.1),transparent)]"></div>
+        <div class="relative z-10">
+          <span class="inline-block px-4 py-1.5 bg-neon-pink/20 border border-neon-pink/40 rounded-full text-neon-pink text-xs font-bold tracking-wider uppercase mb-3 animate-pulse-glow">
+            🚀 LAUNCH SPECIAL
+          </span>
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">
+            First <span class="gradient-text">500</span> Members Go Premium
+          </h2>
+          <p class="text-muted text-sm md:text-base max-w-lg mx-auto mb-4">
+            Sign up during launch week and get <strong class="text-white">Premium membership FREE</strong> for life. No catch — just early supporter perks.
+          </p>
+          <div class="flex items-center justify-center gap-6 text-sm">
+            <div>
+              <span class="text-2xl font-bold text-neon-cyan" id="spots-left">500</span>
+              <p class="text-xs text-muted">Spots Left</p>
+            </div>
+            <div class="w-px h-10 bg-white/10"></div>
+            <div>
+              <span class="text-2xl font-bold text-neon-pink">0</span>
+              <p class="text-xs text-muted">Claimed</p>
+            </div>
+          </div>
+          <div class="mt-4 w-full max-w-xs mx-auto bg-deep-bg rounded-full h-2 overflow-hidden border border-white/5">
+            <div class="h-full w-0 bg-gradient-to-r from-neon-pink to-neon-cyan rounded-full transition-all duration-500" id="progress-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Header -->
     <div class="text-center mb-12">
       <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
@@ -153,6 +185,26 @@ import { TIERS } from "../../lib/tiers";
     toggle.textContent = isLogin ? "Don't have an account? Sign up" : 'Already have an account? Log in';
   });
 
+  // Load launch counter
+  async function loadLaunchCounter() {
+    if (!supabase) return;
+    try {
+      const { count, error } = await supabase
+        .from('launch_registrations')
+        .select('*', { count: 'exact', head: true });
+      if (!error && count !== null) {
+        const left = Math.max(0, 500 - count);
+        const el = document.getElementById('spots-left');
+        const bar = document.getElementById('progress-bar');
+        if (el) el.textContent = left;
+        if (bar) bar.style.width = `${(count / 500) * 100}%`;
+      }
+    } catch (e) {
+      console.log('Launch counter unavailable (set up Supabase to enable)');
+    }
+  }
+  loadLaunchCounter();
+
   // Handle auth
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -169,16 +221,44 @@ import { TIERS } from "../../lib/tiers";
         if (error) throw error;
         location.reload();
       } else {
-        const { error } = await supabase.auth.signUp({
+        const signupResult = await supabase.auth.signUp({
           email,
           password,
           options: { data: { username: email.split('@')[0] } }
         });
-        if (error) throw error;
-        errorEl.classList.remove('hidden');
-        errorEl.textContent = 'Check your email for the confirmation link!';
-        errorEl.classList.remove('bg-red-900/30', 'border-red-500/30', 'text-red-400');
-        errorEl.classList.add('bg-green-900/30', 'border-green-500/30', 'text-green-400');
+        if (signupResult.error) throw signupResult.error;
+
+        // Track launch registration if spots are available
+        if (signupResult.data?.user) {
+          // Check remaining spots
+          const { count } = await supabase
+            .from('launch_registrations')
+            .select('*', { count: 'exact', head: true });
+          
+          if (!count || count < 500) {
+            await supabase.from('launch_registrations').insert({
+              user_id: signupResult.data.user.id,
+              email: email,
+              claimed_premium: true,
+            });
+            // Update their membership to premium
+            await supabase.from('memberships').upsert({
+              user_id: signupResult.data.user.id,
+              tier: 'premium',
+            });
+            errorEl.classList.remove('hidden');
+            errorEl.innerHTML = '<i class="fa-solid fa-crown mr-2"></i>Welcome! You\'re one of the first 500 — <strong>Premium activated FREE!</strong>';
+            errorEl.style.cssText = 'background: rgba(0,240,255,0.1); border-color: rgba(0,240,255,0.3); color: #00f0ff;';
+          } else {
+            errorEl.classList.remove('hidden');
+            errorEl.textContent = 'Sign up complete! Check your email for confirmation.';
+            errorEl.classList.remove('bg-red-900/30', 'border-red-500/30', 'text-red-400');
+            errorEl.classList.add('bg-green-900/30', 'border-green-500/30', 'text-green-400');
+          }
+          
+          // Refresh counter
+          loadLaunchCounter();
+        }
       }
     } catch (err) {
       errorEl.classList.remove('hidden');
