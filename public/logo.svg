@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <!-- Neon gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0f"/>
+      <stop offset="100%" style="stop-color:#12121a"/>
+    </linearGradient>
+    <linearGradient id="neonPink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff1493"/>
+      <stop offset="100%" style="stop-color:#b84dff"/>
+    </linearGradient>
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f0ff"/>
+      <stop offset="100%" style="stop-color:#b84dff"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff1493"/>
+      <stop offset="50%" style="stop-color:#b84dff"/>
+      <stop offset="100%" style="stop-color:#00f0ff"/>
+    </linearGradient>
+    <linearGradient id="palmGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#b84dff"/>
+      <stop offset="100%" style="stop-color:#00f0ff"/>
+    </linearGradient>
+
+    <!-- Glow filters -->
+    <filter id="glowPink" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glowCyan" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glowLarge" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background circle -->
+  <rect width="400" height="400" rx="80" fill="url(#bgGrad)" stroke="rgba(255,20,147,0.15)" stroke-width="2"/>
+
+  <!-- Ambient glow circles -->
+  <circle cx="120" cy="100" r="80" fill="#ff1493" opacity="0.08" filter="url(#glowLarge)"/>
+  <circle cx="280" cy="300" r="80" fill="#00f0ff" opacity="0.08" filter="url(#glowLarge)"/>
+
+  <!-- Palm tree icon -->
+  <g transform="translate(110, 100) scale(1.1)">
+    <!-- Trunk -->
+    <path d="M80 170 Q78 140 82 110 Q84 90 86 70" stroke="url(#palmGrad)" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glowCyan)"/>
+    <path d="M80 170 Q78 140 82 110 Q84 90 86 70" stroke="url(#palmGrad)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Fronds -->
+    <g filter="url(#glowCyan)">
+      <!-- Top fronds -->
+      <path d="M86 70 Q70 45 35 35" stroke="url(#neonCyan)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M86 70 Q95 40 110 30" stroke="url(#neonCyan)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M86 70 Q85 35 75 15" stroke="url(#neonCyan)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- Side fronds -->
+      <path d="M84 85 Q50 75 20 80" stroke="url(#neonPink)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M84 85 Q115 75 145 70" stroke="url(#neonPink)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M83 100 Q55 105 25 110" stroke="url(#neonCyan)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+      <path d="M83 100 Q110 105 140 100" stroke="url(#neonCyan)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+    </g>
+
+    <!-- Thin detail fronds -->
+    <path d="M86 70 Q60 55 40 50" stroke="#00f0ff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <path d="M86 70 Q100 55 125 50" stroke="#00f0ff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <!-- Stars accent -->
+  <g fill="#00f0ff" opacity="0.4">
+    <circle cx="40" cy="50" r="1.5"/>
+    <circle cx="360" cy="40" r="1"/>
+    <circle cx="340" cy="120" r="1.5"/>
+    <circle cx="50" cy="350" r="1"/>
+    <circle cx="370" cy="280" r="1.2"/>
+    <circle cx="200" cy="30" r="1"/>
+  </g>
+  <g fill="#ff1493" opacity="0.3">
+    <circle cx="60" cy="180" r="1"/>
+    <circle cx="350" cy="200" r="1.2"/>
+    <circle cx="180" cy="360" r="1"/>
+  </g>
+
+  <!-- hub text -->
+  <text x="200" y="268" text-anchor="middle" font-family="'Inter','Segoe UI',sans-serif" font-size="32" font-weight="300" fill="#8888aa" letter-spacing="8" filter="url(#glowPink)">
+    hub
+  </text>
+
+  <!-- gta6 text (main title) -->
+  <text x="200" y="230" text-anchor="middle" font-family="'Poppins','Segoe UI',sans-serif" font-size="52" font-weight="900" fill="url(#textGrad)" letter-spacing="2" filter="url(#glowPink)">
+    GTA VI
+  </text>
+
+  <!-- Subtle underline accent -->
+  <line x1="130" y1="280" x2="270" y2="280" stroke="url(#neonPink)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="160" y1="284" x2="240" y2="284" stroke="url(#neonCyan)" stroke-width="1" opacity="0.3"/>
+
+  <!-- Bottom decorative dots -->
+  <circle cx="175" cy="310" r="3" fill="url(#neonPink)" filter="url(#glowPink)"/>
+  <circle cx="200" cy="315" r="3" fill="url(#neonCyan)" filter="url(#glowCyan)"/>
+  <circle cx="225" cy="310" r="3" fill="url(#neonPink)" filter="url(#glowPink)"/>
+</svg>
