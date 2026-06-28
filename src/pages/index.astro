@@ -50,8 +50,41 @@ import MediaCarousel from "../components/MediaCarousel.astro";
     </div>
   </section>
 
+  <!-- 🚀 Launch Offer Announcement -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-30">
+    <a href="/membership" class="block group">
+      <div class="relative overflow-hidden rounded-2xl border border-neon-cyan/20 bg-gradient-to-r from-neon-cyan/5 via-neon-purple/5 to-neon-pink/5 p-5 md:p-6 hover:border-neon-cyan/40 transition-all">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,240,255,0.06),transparent_50%)]"></div>
+        <div class="relative z-10 flex items-center gap-4">
+          <div class="hidden sm:flex w-12 h-12 rounded-xl bg-neon-cyan/10 items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-gift text-2xl text-neon-cyan"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-0.5">
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/30 uppercase tracking-wider">
+                🚀 Launch Special
+              </span>
+              <span class="text-xs text-muted">Limited time</span>
+            </div>
+            <p class="text-sm md:text-base text-white font-medium">
+              Sign up for a <strong class="gradient-text">free account</strong> and get automatically upgraded to 
+              <strong class="text-neon-cyan">Premium</strong> — first 500 only.
+            </p>
+          </div>
+          <div class="shrink-0">
+            <div class="text-center">
+              <span class="text-2xl font-bold text-neon-cyan" id="home-spots">500</span>
+              <p class="text-[10px] text-muted uppercase tracking-wider">Spots left</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-muted group-hover:text-white transition-colors hidden sm:block"></i>
+        </div>
+      </div>
+    </a>
+  </section>
+
   <!-- ⏱ Countdown -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-30">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 relative z-30">
     <CountdownWidget targetDate="2026-11-19T00:00:00" label="Countdown to Release" />
   </section>
 
@@ -166,3 +199,23 @@ import MediaCarousel from "../components/MediaCarousel.astro";
     </div>
   </section>
 </BaseLayout>
+
+<script type="module">
+  import { loadSupabase } from '../lib/client.ts';
+
+  async function loadHomeCounter() {
+    const supabase = await loadSupabase();
+    if (!supabase) return;
+    try {
+      const { count, error } = await supabase
+        .from('launch_registrations')
+        .select('*', { count: 'exact', head: true });
+      if (!error && count !== null) {
+        const left = Math.max(0, 500 - count);
+        const el = document.getElementById('home-spots');
+        if (el) el.textContent = left;
+      }
+    } catch (e) {}
+  }
+  loadHomeCounter();
+</script>
