@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NewsCard from "../../components/NewsCard.astro";
+
+const articles = [
+  { title: "Rockstar Files New Trademarks for GTA VI Online", excerpt: "New trademark filings suggest Rockstar is preparing the groundwork for GTA VI's multiplayer component, including 'GTA VI Online' and 'Leonida Online' branding.", date: "June 27, 2026", category: "Official News", image: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=600&q=80", slug: "rockstar-trademarks-gta6-online" },
+  { title: "Leaked Gameplay Shows Expanded Leonida Map", excerpt: "Alleged pre-alpha footage reveals a sprawling map with multiple new districts, interactive environments, and dynamic events spread across the Leonida region.", date: "June 25, 2026", category: "Leaks", image: "https://images.unsplash.com/photo-1553481180-ed2468b0c677?w=600&q=80", slug: "leaked-gameplay-leonida-map" },
+  { title: "GTA VI Will Feature Dynamic Weather Systems", excerpt: "Sources confirm that Rockstar is implementing a next-gen weather system with hurricanes, flooding, and seasonal changes that affect gameplay.", date: "June 22, 2026", category: "Rumors", image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&q=80", slug: "dynamic-weather-systems" },
+  { title: "Voice Cast Rumored for GTA VI", excerpt: "Industry insiders suggest a star-studded voice cast is being assembled, with several A-list actors reportedly in negotiations.", date: "June 20, 2026", category: "Rumors", image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&q=80", slug: "voice-cast-rumors" },
+  { title: "Rockstar Confirms GTA VI Will Have Single-Player DLC", excerpt: "In a surprising move, Rockstar has confirmed plans for post-launch single-player expansions, a departure from the GTA V model.", date: "June 18, 2026", category: "Official News", image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600&q=80", slug: "single-player-dlc-confirmed" },
+  { title: "New Screenshots Showcase Ray Tracing and 60 FPS", excerpt: "Official screenshots posted on the Rockstar website highlight impressive ray-traced reflections and lighting at 60 frames per second.", date: "June 15, 2026", category: "Official News", image: "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=600&q=80", slug: "ray-tracing-60fps-screenshots" },
+  { title: "GTA VI Map Size Compared to Previous Games", excerpt: "Analysis of leaked data suggests the GTA VI map is significantly larger than GTA V and Red Dead Redemption 2 combined.", date: "June 12, 2026", category: "Analysis", image: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&q=80", slug: "map-size-comparison" },
+  { title: "Community Speculates on Release Date Window", excerpt: "With Rockstar's historical release patterns and recent marketing moves, the community narrows down the likely launch window.", date: "June 10, 2026", category: "Speculation", image: "https://images.unsplash.com/photo-1611095973763-4141fe282abb?w=600&q=80", slug: "release-date-speculation" },
+];
+---
+
+<BaseLayout title="News" description="All the latest GTA VI news, leaks, rumors, and official updates.">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+        <span class="gradient-text">GTA VI News Hub</span>
+      </h1>
+      <p class="text-muted max-w-2xl mx-auto">
+        Stay up to date with the latest official announcements, community leaks, rumors, and in-depth analysis.
+      </p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10">
+      <button class="px-4 py-2 bg-neon-pink text-white rounded-full text-sm font-medium">All</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Official News</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Leaks</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Rumors</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Analysis</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Speculation</button>
+    </div>
+
+    <!-- RSS Link -->
+    <div class="text-right mb-6">
+      <a href="/news/rss.xml" class="text-xs text-muted hover:text-neon-orange transition-colors">
+        <i class="fa-solid fa-rss mr-1"></i> Subscribe via RSS
+      </a>
+    </div>
+
+    <!-- Article Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {articles.map((article) => (
+        <NewsCard {...article} />
+      ))}
+    </div>
+
+    <!-- Load More -->
+    <div class="text-center mt-12">
+      <button class="glass text-white px-8 py-3 rounded-xl font-medium hover:bg-white/10 transition-all cursor-pointer">
+        Load More Articles <i class="fa-solid fa-chevron-down ml-2"></i>
+      </button>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="mt-16 bg-card rounded-2xl border border-white/5 p-8 text-center max-w-2xl mx-auto">
+      <i class="fa-solid fa-envelope-open-text text-3xl text-neon-gold mb-4"></i>
+      <h3 class="font-display font-semibold text-xl mb-2">Never Miss a Story</h3>
+      <p class="text-muted text-sm mb-6">Get the latest GTA VI news delivered to your inbox every week.</p>
+      <form class="flex gap-3 max-w-md mx-auto">
+        <input type="email" placeholder="your@email.com" class="flex-1 bg-deep-bg border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-muted focus:outline-none focus:border-neon-pink/50" />
+        <button type="submit" class="bg-neon-pink text-white px-6 py-3 rounded-xl font-medium hover:bg-neon-pink/80 transition-all glow-pink">Subscribe</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

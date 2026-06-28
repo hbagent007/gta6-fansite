@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const guides = [
+  { title: "Top 10 Money Making Methods in Leonida", slug: "top-10-money-methods", desc: "The fastest ways to stack cash in GTA VI from day one", category: "Money", tier: "premium", reads: 2347 },
+  { title: "All Hidden Vehicle Locations", slug: "hidden-vehicle-locations", desc: "Every rare car, bike, and boat spawn location mapped out", category: "Cars", tier: "premium", reads: 1856 },
+  { title: "Secret Loot Map: Underground Caches", slug: "secret-loot-map", desc: "Hidden weapon caches, money stashes, and rare items in Leonida", category: "Maps", tier: "elite", reads: 923 },
+  { title: "Best Early Game Weapon Locations", slug: "early-weapons", desc: "Get the best weapons before you've even started the story", category: "Locations", tier: "premium", reads: 2104 },
+  { title: "Complete Property Investment Guide", slug: "property-guide", desc: "Which properties to buy and when for maximum ROI", category: "Money", tier: "elite", reads: 678 },
+  { title: "Rare Car Spawn Times & Conditions", slug: "rare-car-spawns", desc: "Day/night cycles, weather conditions, and triggers for rare vehicles", category: "Cars", tier: "premium", reads: 1523 },
+  { title: "Easter Egg Master List", slug: "easter-eggs", desc: "Every discovered Easter egg in GTA VI so far", category: "Secrets", tier: "free", reads: 3421 },
+  { title: "Detailed Frame-by-Frame Analysis", slug: "frame-analysis", desc: "Every frame of every trailer analyzed for hidden details", category: "Analysis", tier: "elite", reads: 445 },
+];
+---
+
+<BaseLayout title="Guides" description="Exclusive GTA VI guides — money making, car locations, secret maps, and analysis">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+        <span class="gradient-text">Member Guides</span>
+      </h1>
+      <p class="text-muted max-w-2xl mx-auto">
+        Exclusive guides and resources created by the community. Some guides require Premium or Elite membership.
+      </p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10">
+      <button class="px-4 py-2 bg-neon-pink text-white rounded-full text-sm font-medium">All</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Money</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Cars</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Locations</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Maps</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Secrets</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Analysis</button>
+    </div>
+
+    <!-- Guide Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {guides.map((guide) => (
+        <a
+          href={guide.tier !== 'free' ? '/membership' : `/guides/${guide.slug}`}
+          class="bg-card rounded-2xl border border-white/5 p-6 hover:border-white/10 transition-all group relative"
+        >
+          <div class="flex items-start justify-between mb-4">
+            <span class={`text-xs font-medium px-2.5 py-1 rounded-full border ${
+              guide.tier === 'free'
+                ? 'bg-green-900/30 text-green-400 border-green-500/30'
+                : guide.tier === 'premium'
+                ? 'bg-neon-cyan/10 text-neon-cyan border-neon-cyan/30'
+                : 'bg-neon-pink/10 text-neon-pink border-neon-pink/30'
+            }`}>
+              {guide.tier === 'free' ? 'Free' : guide.tier === 'premium' ? (
+                <><i class="fa-solid fa-lock mr-1"></i>Premium</>
+              ) : (
+                <><i class="fa-solid fa-crown mr-1"></i>Elite</>
+              )}
+            </span>
+            <span class="text-xs text-muted">
+              <i class="fa-regular fa-eye mr-1"></i>{guide.reads.toLocaleString()}
+            </span>
+          </div>
+
+          <span class="text-xs text-muted uppercase tracking-wider">{guide.category}</span>
+          <h3 class="font-display font-semibold text-base mt-1 mb-2 group-hover:text-neon-cyan transition-colors">
+            {guide.title}
+          </h3>
+          <p class="text-sm text-muted leading-relaxed">{guide.desc}</p>
+
+          {guide.tier !== 'free' && (
+            <div class="absolute inset-0 bg-card/60 backdrop-blur-[2px] rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="glass px-5 py-2.5 rounded-xl text-sm font-medium text-white">
+                <i class="fa-solid fa-unlock mr-2"></i>Upgrade to Access
+              </span>
+            </div>
+          )}
+        </a>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 bg-card rounded-2xl border border-white/5 p-8 text-center max-w-2xl mx-auto">
+      <i class="fa-solid fa-book-open text-3xl text-neon-cyan mb-4"></i>
+      <h3 class="font-display font-semibold text-xl mb-2">Got a Guide to Share?</h3>
+      <p class="text-muted text-sm mb-6">Premium and Elite members can submit their own guides for the community.</p>
+      <a href="/membership" class="bg-gradient-to-r from-neon-pink to-neon-purple text-white px-6 py-3 rounded-xl font-medium inline-block hover:opacity-90 transition-all">
+        Become a Creator <i class="fa-solid fa-arrow-right ml-2"></i>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

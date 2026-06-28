@@ -1,0 +1,44 @@
+---
+export interface Props {
+  title?: string;
+  compact?: boolean;
+}
+
+const { title = "Community Buzz", compact = false } = Astro.props;
+---
+
+<div class={`bg-card rounded-2xl border border-white/5 ${compact ? 'p-4' : 'p-6'}`}>
+  <h3 class={`font-display font-semibold text-white ${compact ? 'text-sm mb-3' : 'text-lg mb-4'}`}>
+    <i class="fa-solid fa-hashtag text-neon-cyan mr-2"></i>
+    {title}
+  </h3>
+
+  <!-- Simulated social feed items (replace with real API later) -->
+  <div class="space-y-3">
+    <div class="flex gap-3 animate-fade-in">
+      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-neon-pink to-neon-purple flex items-center justify-center text-xs font-bold shrink-0">RS</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs text-muted"><span class="text-white font-medium">Rockstar Games</span> · 2h ago</p>
+        <p class="text-sm mt-1">The wait is almost over. Something big is coming. 👀</p>
+      </div>
+    </div>
+    <div class="flex gap-3 animate-fade-in" style="animation-delay: 0.1s">
+      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-neon-cyan to-blue-600 flex items-center justify-center text-xs font-bold shrink-0">TC</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs text-muted"><span class="text-white font-medium">TezFunz2</span> · 5h ago</p>
+        <p class="text-sm mt-1">New trademark filings suggest a surprise is dropping before E3. 👀</p>
+      </div>
+    </div>
+    <div class="flex gap-3 animate-fade-in" style="animation-delay: 0.2s">
+      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-neon-gold to-neon-orange flex items-center justify-center text-xs font-bold shrink-0">GT</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs text-muted"><span class="text-white font-medium">GTA VI News</span> · 1d ago</p>
+        <p class="text-sm mt-1">New leaked screenshot appears to show updated Leonida skyline. 🔥</p>
+      </div>
+    </div>
+  </div>
+
+  <a href="#" class="block text-center text-xs text-neon-cyan hover:text-neon-cyan/80 mt-4 transition-colors">
+    View more on X/Twitter <i class="fa-solid fa-arrow-right ml-1"></i>
+  </a>
+</div>

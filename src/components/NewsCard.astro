@@ -1,0 +1,40 @@
+---
+export interface Props {
+  title: string;
+  excerpt: string;
+  date: string;
+  category: string;
+  image: string;
+  slug?: string;
+}
+
+const { title, excerpt, date, category, image, slug } = Astro.props;
+const href = slug ? `/news/${slug}` : '#';
+---
+
+<article class="group bg-card rounded-2xl border border-white/5 overflow-hidden hover:border-white/10 transition-all hover:-translate-y-1 duration-300">
+  <a href={href}>
+    <div class="aspect-video overflow-hidden">
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+      />
+    </div>
+    <div class="p-5">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-neon-pink/10 text-neon-pink border border-neon-pink/20">
+          {category}
+        </span>
+        <span class="text-xs text-muted">{date}</span>
+      </div>
+      <h3 class="font-display font-semibold text-base mb-2 group-hover:text-neon-cyan transition-colors line-clamp-2">
+        {title}
+      </h3>
+      <p class="text-sm text-muted leading-relaxed line-clamp-3">
+        {excerpt}
+      </p>
+    </div>
+  </a>
+</article>

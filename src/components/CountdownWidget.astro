@@ -1,0 +1,66 @@
+---
+export interface Props {
+  targetDate: string;
+  label?: string;
+}
+
+const { targetDate, label = "Countdown to Release" } = Astro.props;
+---
+
+<div class="bg-card rounded-2xl border border-white/5 p-6 md:p-8 text-center">
+  <p class="text-muted text-xs uppercase tracking-widest mb-4">
+    <i class="fa-regular fa-clock mr-2"></i>{label}
+  </p>
+  <div id="countdown" class="flex justify-center gap-3 md:gap-6" data-target={targetDate}>
+    <div class="text-center">
+      <div class="countdown-digit" id="countdown-days">--</div>
+      <p class="text-xs text-muted mt-2 uppercase tracking-wider">Days</p>
+    </div>
+    <div class="text-center">
+      <div class="countdown-digit" id="countdown-hours">--</div>
+      <p class="text-xs text-muted mt-2 uppercase tracking-wider">Hours</p>
+    </div>
+    <div class="text-center">
+      <div class="countdown-digit" id="countdown-minutes">--</div>
+      <p class="text-xs text-muted mt-2 uppercase tracking-wider">Mins</p>
+    </div>
+    <div class="text-center">
+      <div class="countdown-digit" id="countdown-seconds">--</div>
+      <p class="text-xs text-muted mt-2 uppercase tracking-wider">Secs</p>
+    </div>
+  </div>
+  <p class="text-muted/40 text-xs mt-4">* Estimated based on current projections</p>
+</div>
+
+<script>
+  const targetStr = document.getElementById('countdown')?.dataset.target;
+  if (targetStr) {
+    const target = new Date(targetStr).getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown-days')!.textContent = '00';
+        document.getElementById('countdown-hours')!.textContent = '00';
+        document.getElementById('countdown-minutes')!.textContent = '00';
+        document.getElementById('countdown-seconds')!.textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('countdown-days')!.textContent = String(days).padStart(2, '0');
+      document.getElementById('countdown-hours')!.textContent = String(hours).padStart(2, '0');
+      document.getElementById('countdown-minutes')!.textContent = String(minutes).padStart(2, '0');
+      document.getElementById('countdown-seconds')!.textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
+</script>

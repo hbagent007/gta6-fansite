@@ -1,0 +1,166 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Trailers" description="Watch every GTA VI trailer with frame-by-frame breakdowns and comparison tools.">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+        <span class="gradient-text">Trailer Vault</span>
+      </h1>
+      <p class="text-muted max-w-2xl mx-auto">
+        Every official trailer, teaser, and promo — with frame-by-frame analysis, breakdown annotations, and side-by-side comparisons.
+      </p>
+    </div>
+
+    <!-- Trailer 1: Reveal -->
+    <div class="mb-16" id="trailer1">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="text-xs font-medium px-3 py-1 rounded-full bg-neon-pink/10 text-neon-pink border border-neon-pink/20">Trailer 1</span>
+        <h2 class="font-display text-2xl font-bold">Grand Theft Auto VI — Reveal Trailer</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Video Embed -->
+        <div class="lg:col-span-2">
+          <div class="aspect-video rounded-2xl overflow-hidden bg-card border border-white/5">
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/QdBZY2fkU-0?si=placeholder"
+              title="GTA VI Reveal Trailer"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- Analysis Panel -->
+        <div class="bg-card rounded-2xl border border-white/5 p-5 overflow-y-auto max-h-[400px] lg:max-h-none">
+          <h3 class="font-display font-semibold text-sm mb-4 text-neon-cyan">
+            <i class="fa-solid fa-microscope mr-2"></i>Analysis Notes
+          </h3>
+          <div class="space-y-4 text-sm">
+            <div class="pb-3 border-b border-white/5">
+              <p class="text-white font-medium">0:00 — Opening Shot</p>
+              <p class="text-muted mt-1">Aerial view of Vice City skyline at sunset. The neon glow and palm trees immediately establish the Miami-inspired setting. Notice the improved draw distance over GTA V.</p>
+            </div>
+            <div class="pb-3 border-b border-white/5">
+              <p class="text-white font-medium">0:15 — Protagonist Reveal</p>
+              <p class="text-muted mt-1">First look at Lucia, one of the two playable protagonists. The orange jumpsuit and prison setting suggest the story begins with an escape or release.</p>
+            </div>
+            <div class="pb-3 border-b border-white/5">
+              <p class="text-white font-medium">0:32 — Leonida Map</p>
+              <p class="text-muted mt-1">Quick montage showing various locations: beaches, wetlands, suburban neighborhoods, and a massive city center. The scale is enormous.</p>
+            </div>
+            <div class="pb-3 border-b border-white/5">
+              <p class="text-white font-medium">0:45 — Wildlife</p>
+              <p class="text-muted mt-1">Alligators, flamingos, dolphins — Rockstar is leaning heavily into the Florida/Everglades inspiration. Dynamic wildlife interactions confirmed.</p>
+            </div>
+            <div>
+              <p class="text-white font-medium">1:10 — Tagline</p>
+              <p class="text-muted mt-1">"Leonida. Let's Go." — the official state name and a clear call to adventure. The community blew up when this dropped.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Download Links -->
+      <div class="flex gap-4 mt-4">
+        <a href="#" class="glass px-4 py-2 rounded-xl text-xs text-muted hover:text-white transition-colors">
+          <i class="fa-solid fa-download mr-1"></i> Download 4K
+        </a>
+        <a href="#" class="glass px-4 py-2 rounded-xl text-xs text-muted hover:text-white transition-colors">
+          <i class="fa-solid fa-download mr-1"></i> Download 1080p
+        </a>
+      </div>
+    </div>
+
+    <!-- Trailer Comparison Tool -->
+    <div class="bg-card rounded-2xl border border-white/5 p-6 md:p-8 mb-12" id="comparison">
+      <h2 class="font-display text-2xl font-bold mb-2">
+        <i class="fa-solid fa-not-equal text-neon-purple mr-2"></i>
+        Trailer Comparison
+      </h2>
+      <p class="text-muted text-sm mb-6">Drag the slider to compare reveal trailer frames side by side.</p>
+
+      <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-deep-bg select-none" id="compare-container">
+        <!-- Left Image -->
+        <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=1200&q=80" alt="Trailer 1 frame" class="absolute inset-0 w-full h-full object-cover" />
+
+        <!-- Right Image (clipped) -->
+        <div class="absolute inset-0 w-1/2 overflow-hidden border-r-2 border-neon-cyan" id="right-clip">
+          <img src="https://images.unsplash.com/photo-1553481180-ed2468b0c677?w=1200&q=80" alt="Trailer 2 frame" class="w-full h-full object-cover" style="object-position: left;" />
+        </div>
+
+        <!-- Slider Handle -->
+        <div class="absolute top-0 bottom-0 w-1 bg-neon-cyan cursor-col-resize" id="slider-handle" style="left: 50%;">
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-neon-cyan flex items-center justify-center shadow-lg border-2 border-white">
+            <i class="fa-solid fa-arrows-left-right text-deep-bg text-xs"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between mt-3 text-xs text-muted">
+        <span>Trailer 1: Reveal</span>
+        <span>Trailer 2: Gameplay (leaked)</span>
+      </div>
+    </div>
+
+    <!-- Trailer Grid: More Trailers -->
+    <h2 class="font-display text-2xl font-bold mb-6">All Trailers</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-card rounded-2xl border border-white/5 overflow-hidden group">
+        <div class="aspect-video bg-gradient-to-br from-neon-purple/20 to-deep-bg flex items-center justify-center">
+          <i class="fa-solid fa-play-circle text-6xl text-white/20 group-hover:text-neon-pink transition-colors"></i>
+        </div>
+        <div class="p-4">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-neon-purple/10 text-neon-purple border border-neon-purple/20">Gameplay Trailer</span>
+          </div>
+          <h3 class="font-medium">Gameplay Deep Dive</h3>
+          <p class="text-xs text-muted mt-1">Coming soon</p>
+        </div>
+      </div>
+
+      <div class="bg-card rounded-2xl border border-white/5 overflow-hidden group">
+        <div class="aspect-video bg-gradient-to-br from-neon-orange/20 to-deep-bg flex items-center justify-center">
+          <i class="fa-solid fa-play-circle text-6xl text-white/20 group-hover:text-neon-pink transition-colors"></i>
+        </div>
+        <div class="p-4">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-neon-gold/10 text-neon-gold border border-neon-gold/20">Story Trailer</span>
+          </div>
+          <h3 class="font-medium">Story Trailer</h3>
+          <p class="text-xs text-muted mt-1">Coming soon</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const container = document.getElementById('compare-container');
+  const handle = document.getElementById('slider-handle');
+  const rightClip = document.getElementById('right-clip');
+
+  if (container && handle && rightClip) {
+    let isDragging = false;
+
+    const moveSlider = (e) => {
+      const rect = container.getBoundingClientRect();
+      let x = (e.clientX ?? e.touches?.[0]?.clientX) - rect.left;
+      x = Math.max(0, Math.min(x, rect.width));
+      const pct = (x / rect.width) * 100;
+      rightClip.style.width = `${pct}%`;
+      handle.style.left = `${pct}%`;
+    };
+
+    handle.addEventListener('mousedown', () => isDragging = true);
+    handle.addEventListener('touchstart', () => isDragging = true, { passive: true });
+    document.addEventListener('mousemove', (e) => { if (isDragging) moveSlider(e); });
+    document.addEventListener('touchmove', (e) => { if (isDragging) moveSlider(e); }, { passive: true });
+    document.addEventListener('mouseup', () => isDragging = false);
+    document.addEventListener('touchend', () => isDragging = false);
+  }
+</script>

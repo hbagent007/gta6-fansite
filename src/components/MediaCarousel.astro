@@ -1,0 +1,51 @@
+---
+const images = [
+  {
+    url: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=800&q=80",
+    caption: "Concept art — Vice City skyline at sunset"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1553481180-ed2468b0c677?w=800&q=80",
+    caption: "Rumored screenshot — Leonida wetlands"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&q=80",
+    caption: "Dynamic weather system — hurricane season"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
+    caption: "Nightlife district — neon signs and palm trees"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=800&q=80",
+    caption: "Beach boardwalk — key location in Leonida"
+  },
+];
+---
+
+<div class="relative">
+  <div class="carousel-track flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth">
+    {images.map((img) => (
+      <div class="snap-start shrink-0 w-[85vw] md:w-[45vw] lg:w-[30vw]">
+        <div class="bg-card rounded-2xl border border-white/5 overflow-hidden group cursor-pointer">
+          <div class="aspect-video overflow-hidden">
+            <img
+              src={img.url}
+              alt={img.caption}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-3">
+            <p class="text-xs text-muted">{img.caption}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden md:block">
+    <div class="bg-gradient-to-l from-deep-bg to-transparent w-16 h-full"></div>
+  </div>
+</div>

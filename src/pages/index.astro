@@ -1,0 +1,168 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SocialFeed from "../components/SocialFeed.astro";
+import CountdownWidget from "../components/CountdownWidget.astro";
+import NewsCard from "../components/NewsCard.astro";
+import MediaCarousel from "../components/MediaCarousel.astro";
+---
+
+<BaseLayout title="Home">
+  <!-- 🎬 Hero Section -->
+  <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+    <!-- Background gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-deep-bg via-deep-bg/50 to-deep-bg z-10"></div>
+    <!-- Animated background pattern -->
+    <div class="absolute inset-0 opacity-10 z-0">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-neon-pink rounded-full blur-[128px] animate-pulse-glow"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-neon-purple rounded-full blur-[128px] animate-pulse-glow" style="animation-delay: 1s"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-neon-cyan rounded-full blur-[100px] animate-pulse-glow" style="animation-delay: 0.5s"></div>
+    </div>
+
+    <div class="relative z-20 text-center px-4 max-w-4xl mx-auto">
+      <div class="animate-slide-up">
+        <span class="inline-block px-4 py-1.5 bg-neon-pink/10 border border-neon-pink/30 rounded-full text-neon-pink text-xs font-semibold tracking-wider uppercase mb-6">
+          <i class="fa-solid fa-spinner fa-spin mr-2"></i>
+          Highly Anticipated
+        </span>
+        <h1 class="font-display text-6xl md:text-8xl lg:text-9xl font-black leading-none mb-4">
+          <span class="gradient-text">GTA VI</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-muted font-light mb-2">Leonida. Let's Go.</p>
+        <p class="text-muted/60 text-sm">Coming {new Date().getFullYear() + 1} · PlayStation 5 · Xbox Series X|S</p>
+      </div>
+
+      <div class="mt-10 flex flex-wrap justify-center gap-4 animate-fade-in" style="animation-delay: 0.4s">
+        <a href="/trailers" class="inline-flex items-center gap-2 bg-neon-pink text-white px-6 py-3 rounded-xl font-medium hover:bg-neon-pink/80 transition-all glow-pink">
+          <i class="fa-solid fa-play"></i> Watch Trailers
+        </a>
+        <a href="/news" class="inline-flex items-center gap-2 glass text-white px-6 py-3 rounded-xl font-medium hover:bg-white/10 transition-all">
+          <i class="fa-solid fa-newspaper"></i> Latest News
+        </a>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="mt-16 animate-fade-in" style="animation-delay: 0.8s">
+        <p class="text-muted/40 text-xs mb-2">Scroll for more</p>
+        <div class="w-5 h-8 border-2 border-muted/30 rounded-full mx-auto flex justify-center pt-1">
+          <div class="w-1 h-2 bg-neon-pink rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⏱ Countdown -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-30">
+    <CountdownWidget targetDate="2026-10-01T00:00:00" label="Estimated Release Countdown" />
+  </section>
+
+  <!-- 🔥 Featured News -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="font-display text-2xl md:text-3xl font-bold">
+        <span class="gradient-text">Latest News</span>
+      </h2>
+      <a href="/news" class="text-sm text-neon-cyan hover:text-neon-cyan/80 transition-colors">
+        View All <i class="fa-solid fa-arrow-right ml-1"></i>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <NewsCard
+        title="Rockstar Files New Trademarks for GTA VI Online"
+        excerpt="New trademark filings suggest Rockstar is preparing the groundwork for GTA VI's multiplayer component..."
+        date="June 27, 2026"
+        category="Official News"
+        image="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=600&q=80"
+      />
+      <NewsCard
+        title="Leaked Gameplay Shows Expanded Leonida Map"
+        excerpt="Alleged pre-alpha footage reveals a sprawling map with multiple new districts and interactive environments..."
+        date="June 25, 2026"
+        category="Leaks"
+        image="https://images.unsplash.com/photo-1553481180-ed2468b0c677?w=600&q=80"
+      />
+      <NewsCard
+        title="GTA VI Will Feature Dynamic Weather Systems"
+        excerpt="Sources confirm that Rockstar is implementing a next-gen weather system with hurricanes and flooding..."
+        date="June 22, 2026"
+        category="Rumors"
+        image="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&q=80"
+      />
+    </div>
+  </section>
+
+  <!-- 🖼 Media Carousel -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+    <h2 class="font-display text-2xl md:text-3xl font-bold mb-8">
+      <span class="gradient-text">Media Gallery</span>
+    </h2>
+    <MediaCarousel />
+  </section>
+
+  <!-- 📱 Features Grid -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+    <h2 class="font-display text-2xl md:text-3xl font-bold text-center mb-12">
+      <span class="gradient-text">Explore Leonida</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a href="/map" class="group bg-card rounded-2xl border border-white/5 p-8 hover:border-neon-cyan/30 transition-all hover:glow-cyan">
+        <div class="w-14 h-14 rounded-xl bg-neon-cyan/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <i class="fa-solid fa-map text-2xl text-neon-cyan"></i>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Interactive Map</h3>
+        <p class="text-muted text-sm">Explore Leonida with pinned locations, screenshots, and community notes.</p>
+      </a>
+
+      <a href="/characters" class="group bg-card rounded-2xl border border-white/5 p-8 hover:border-neon-pink/30 transition-all hover:glow-pink">
+        <div class="w-14 h-14 rounded-xl bg-neon-pink/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <i class="fa-solid fa-users text-2xl text-neon-pink"></i>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Character Database</h3>
+        <p class="text-muted text-sm">Browse confirmed and rumored characters with bios and voice actors.</p>
+      </a>
+
+      <a href="/trailers" class="group bg-card rounded-2xl border border-white/5 p-8 hover:border-neon-purple/30 transition-all hover:glow-cyan">
+        <div class="w-14 h-14 rounded-xl bg-neon-purple/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <i class="fa-solid fa-film text-2xl text-neon-purple"></i>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Trailers & Analysis</h3>
+        <p class="text-muted text-sm">Watch every trailer with frame-by-frame breakdowns and comparison tools.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- 📰 Social Feed + Newsletter Sidebar -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <SocialFeed />
+      </div>
+      <div class="bg-card rounded-2xl border border-white/5 p-6">
+        <h3 class="font-display font-semibold text-lg mb-4">
+          <i class="fa-solid fa-envelope text-neon-gold mr-2"></i>
+          Stay in the Loop
+        </h3>
+        <p class="text-muted text-sm mb-4">Get GTA VI news, leaks, and updates straight to your inbox. No spam, just the good stuff.</p>
+        <form class="space-y-3">
+          <input type="email" placeholder="Your email address" class="w-full bg-deep-bg border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-muted focus:outline-none focus:border-neon-pink/50 transition-colors" />
+          <button type="submit" class="w-full bg-gradient-to-r from-neon-pink to-neon-purple text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-all">
+            Subscribe <i class="fa-solid fa-paper-plane ml-2"></i>
+          </button>
+        </form>
+        <p class="text-muted/40 text-xs mt-3">Powered by Buttondown. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⚠ Disclaimer -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-8">
+    <div class="bg-card/50 rounded-2xl border border-white/5 p-6 text-center">
+      <p class="text-muted/50 text-xs">
+        <i class="fa-solid fa-info-circle mr-1"></i>
+        This is a non-commercial fan project. Not affiliated with Rockstar Games or Take-Two Interactive.
+        All trademarks and media belong to their respective owners.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

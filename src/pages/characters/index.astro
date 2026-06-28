@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const characters = [
+  { name: "Lucia", role: "Protagonist", status: "Confirmed", image: "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400&q=80", bio: "One of two playable protagonists. First seen in an orange prison jumpsuit in the reveal trailer, suggesting her story begins with incarceration or escape.", voiceActor: "TBA" },
+  { name: "Jason", role: "Protagonist", status: "Rumored", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80", bio: "The second playable protagonist. Limited information available — believed to be Lucia's partner or accomplice based on leaked audio clips.", voiceActor: "TBA" },
+  { name: "Vice City Mayor", role: "Antagonist", status: "Rumored", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80", bio: "Unnamed corrupt politician believed to be a primary antagonist. Rumored to control the city's underworld through political connections.", voiceActor: "TBA" },
+  { name: "El Rubio", role: "Drug Lord", status: "Rumored", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80", bio: "Powerful drug lord operating out of Leonida's coastal regions. May tie into GTA Online's Cayo Perico heist storyline.", voiceActor: "TBA" },
+  { name: "Dre", role: "Hacker / Ally", status: "Speculated", image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80", bio: "Speculated tech-savvy ally who assists the protagonists with heists and electronic warfare. Early concept art shows a character with cyberpunk aesthetics.", voiceActor: "TBA" },
+  { name: "Detective Harris", role: "Law Enforcement", status: "Speculated", image: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?w=400&q=80", bio: "Leonida PD detective believed to be pursuing the protagonists throughout the story. May be an antagonistic force or an unlikely ally.", voiceActor: "TBA" },
+];
+---
+
+<BaseLayout title="Characters" description="Browse confirmed and rumored GTA VI characters with bios, voice actors, and status tags.">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+        <span class="gradient-text">Character Database</span>
+      </h1>
+      <p class="text-muted max-w-2xl mx-auto">
+        Browse all confirmed and rumored characters for GTA VI. Filter by role, status, or scroll through the full roster.
+      </p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10">
+      <button class="px-4 py-2 bg-neon-pink text-white rounded-full text-sm font-medium">All</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Protagonists</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Antagonists</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Allies</button>
+      <button class="px-4 py-2 bg-card border border-white/10 text-muted hover:text-white rounded-full text-sm font-medium transition-colors">Law Enforcement</button>
+    </div>
+
+    <!-- Character Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {characters.map((char) => (
+        <div class="bg-card rounded-2xl border border-white/5 overflow-hidden group hover:border-white/10 transition-all hover:-translate-y-1 duration-300">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img src={char.image} alt={char.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-display font-semibold text-lg">{char.name}</h3>
+              <span class={`text-xs font-medium px-2.5 py-1 rounded-full border ${
+                char.status === "Confirmed"
+                  ? "bg-green-900/30 text-green-400 border-green-500/30"
+                  : char.status === "Rumored"
+                  ? "bg-yellow-900/30 text-yellow-400 border-yellow-500/30"
+                  : "bg-gray-800/50 text-muted border-white/10"
+              }`}>
+                {char.status}
+              </span>
+            </div>
+            <p class="text-xs text-neon-cyan font-medium mb-3">{char.role}</p>
+            <p class="text-sm text-muted leading-relaxed">{char.bio}</p>
+            <div class="mt-4 pt-3 border-t border-white/5">
+              <p class="text-xs text-muted">
+                <span class="text-muted/60">Voice Actor:</span> {char.voiceActor}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Voting Widget -->
+    <div class="mt-16 bg-card rounded-2xl border border-white/5 p-8 text-center max-w-2xl mx-auto">
+      <i class="fa-solid fa-headphones text-3xl text-neon-gold mb-4"></i>
+      <h3 class="font-display font-semibold text-xl mb-2">Soundtrack Wishlist</h3>
+      <p class="text-muted text-sm mb-6">
+        Vote on songs you want to hear on GTA VI's radio stations. Community-powered tracklist.
+      </p>
+      <button class="bg-gradient-to-r from-neon-gold to-neon-orange text-white px-8 py-3 rounded-xl font-medium hover:opacity-90 transition-all cursor-pointer">
+        <i class="fa-solid fa-music mr-2"></i>Submit a Song
+      </button>
+      <p class="text-muted/40 text-xs mt-4">238 songs submitted · 1,847 votes cast</p>
+    </div>
+
+    <!-- Prediction Poll -->
+    <div class="mt-8 bg-card rounded-2xl border border-white/5 p-8 max-w-2xl mx-auto">
+      <h3 class="font-display font-semibold text-lg mb-4">
+        <i class="fa-solid fa-chart-simple text-neon-cyan mr-2"></i>
+        Community Prediction Poll
+      </h3>
+      <p class="text-muted text-sm mb-6">When do you think GTA VI will launch?</p>
+      <div class="space-y-4">
+        <div class="relative">
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-white">Late 2026</span>
+            <span class="text-muted">42%</span>
+          </div>
+          <div class="w-full bg-deep-bg rounded-full h-2.5 overflow-hidden">
+            <div class="bg-neon-pink h-full rounded-full" style="width: 42%"></div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-white">Early 2027</span>
+            <span class="text-muted">31%</span>
+          </div>
+          <div class="w-full bg-deep-bg rounded-full h-2.5 overflow-hidden">
+            <div class="bg-neon-cyan h-full rounded-full" style="width: 31%"></div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-white">Late 2027</span>
+            <span class="text-muted">18%</span>
+          </div>
+          <div class="w-full bg-deep-bg rounded-full h-2.5 overflow-hidden">
+            <div class="bg-neon-purple h-full rounded-full" style="width: 18%"></div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-white">2028 or later</span>
+            <span class="text-muted">9%</span>
+          </div>
+          <div class="w-full bg-deep-bg rounded-full h-2.5 overflow-hidden">
+            <div class="bg-neon-orange h-full rounded-full" style="width: 9%"></div>
+          </div>
+        </div>
+      </div>
+      <form class="mt-6 flex gap-3">
+        <select class="flex-1 bg-deep-bg border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-neon-pink/50">
+          <option value="">Select your prediction</option>
+          <option>Late 2026</option>
+          <option>Early 2027</option>
+          <option>Late 2027</option>
+          <option>2028 or later</option>
+        </select>
+        <button type="submit" class="bg-neon-pink text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-neon-pink/80 transition-all">Vote</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
