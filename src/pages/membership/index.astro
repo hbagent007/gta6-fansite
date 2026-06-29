@@ -5,33 +5,46 @@ import { TIERS } from "../../lib/tiers";
 
 <BaseLayout title="Membership" description="Join hubgta6.com with free, premium, or elite membership. Get access to exclusive guides, maps, and community features.">
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
-    <!-- Launch Offer Banner -->
-    <div class="text-center mb-8">
-      <div class="inline-block bg-gradient-to-r from-neon-pink/20 via-neon-purple/20 to-neon-cyan/20 border border-neon-pink/30 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,20,147,0.1),transparent)]"></div>
-        <div class="relative z-10">
-          <span class="inline-block px-4 py-1.5 bg-neon-pink/20 border border-neon-pink/40 rounded-full text-neon-pink text-xs font-bold tracking-wider uppercase mb-3 animate-pulse-glow">
-            🚀 LAUNCH SPECIAL
+    <!-- Launch Offer Banner — Full Impact -->
+    <div class="mb-10">
+      <div class="relative overflow-hidden rounded-2xl border border-neon-pink/30 bg-gradient-to-br from-neon-pink/10 via-neon-purple/10 to-neon-cyan/10 p-8 md:p-12 max-w-3xl mx-auto">
+        <!-- Animated glow layers -->
+        <div class="absolute -top-20 -right-20 w-60 h-60 bg-neon-pink rounded-full blur-[100px] opacity-20 animate-pulse-glow"></div>
+        <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-neon-cyan rounded-full blur-[100px] opacity-20 animate-pulse-glow" style="animation-delay: 1s"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,20,147,0.08),transparent_60%)]"></div>
+        
+        <div class="relative z-10 text-center">
+          <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-neon-pink/20 border border-neon-pink/40 text-neon-pink text-xs font-bold uppercase tracking-widest mb-4 animate-pulse-glow">
+            <i class="fa-solid fa-rocket"></i> Launch Special
           </span>
-          <h2 class="font-display text-3xl md:text-4xl font-bold mb-2">
-            First <span class="gradient-text">500</span> Members Go Premium
+          
+          <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-3">
+            <span class="gradient-text">Free Premium</span>
+            <span class="text-white"> for the First</span>
+            <br />
+            <span class="text-neon-cyan">500 Members</span>
           </h2>
-          <p class="text-muted text-sm md:text-base max-w-lg mx-auto mb-4">
-            Simply sign up for a <strong class="text-white">free account</strong> — first 500 people get <strong class="text-white">auto-upgraded to Premium</strong> with no extra cost.
+          
+          <p class="text-muted text-sm md:text-base max-w-lg mx-auto mb-6">
+            Sign up for a <strong class="text-white">free account</strong> and get <strong class="text-white">automatically upgraded to Premium</strong> with no extra cost. Keep it forever.
           </p>
-          <div class="flex items-center justify-center gap-6 text-sm">
-            <div>
-              <span class="text-2xl font-bold text-neon-cyan" id="spots-left">500</span>
-              <p class="text-xs text-muted">Spots Left</p>
-            </div>
-            <div class="w-px h-10 bg-white/10"></div>
-            <div>
-              <span class="text-2xl font-bold text-neon-pink">0</span>
-              <p class="text-xs text-muted">Claimed</p>
+          
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div class="inline-flex items-center gap-6 bg-white/5 rounded-xl px-6 py-4 border border-white/10">
+              <div class="text-center">
+                <span class="text-3xl md:text-4xl font-black text-neon-cyan" id="spots-left">500</span>
+                <p class="text-xs text-muted uppercase tracking-wider mt-0.5">Spots Left</p>
+              </div>
+              <div class="w-px h-10 bg-white/10"></div>
+              <div class="text-center">
+                <span class="text-3xl md:text-4xl font-black text-neon-pink">0</span>
+                <p class="text-xs text-muted uppercase tracking-wider mt-0.5">Claimed</p>
+              </div>
             </div>
           </div>
-          <div class="mt-4 w-full max-w-xs mx-auto bg-deep-bg rounded-full h-2 overflow-hidden border border-white/5">
-            <div class="h-full w-0 bg-gradient-to-r from-neon-pink to-neon-cyan rounded-full transition-all duration-500" id="progress-bar"></div>
+          
+          <div class="mt-5 w-full max-w-sm mx-auto bg-deep-bg rounded-full h-3 overflow-hidden border border-white/5">
+            <div class="h-full w-0 bg-gradient-to-r from-neon-pink via-neon-purple to-neon-cyan rounded-full transition-all duration-500" id="progress-bar"></div>
           </div>
         </div>
       </div>

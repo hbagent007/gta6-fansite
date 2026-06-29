@@ -50,34 +50,55 @@ import MediaCarousel from "../components/MediaCarousel.astro";
     </div>
   </section>
 
-  <!-- 🚀 Launch Offer Announcement -->
+  <!-- 🚀 Launch Offer Announcement — Full Impact Hero Banner -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-30">
     <a href="/membership" class="block group">
-      <div class="relative overflow-hidden rounded-2xl border border-neon-cyan/20 bg-gradient-to-r from-neon-cyan/5 via-neon-purple/5 to-neon-pink/5 p-5 md:p-6 hover:border-neon-cyan/40 transition-all">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,240,255,0.06),transparent_50%)]"></div>
-        <div class="relative z-10 flex items-center gap-4">
-          <div class="hidden sm:flex w-12 h-12 rounded-xl bg-neon-cyan/10 items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-gift text-2xl text-neon-cyan"></i>
+      <div class="relative overflow-hidden rounded-2xl border border-neon-pink/30 bg-gradient-to-br from-neon-pink/10 via-neon-purple/10 to-neon-cyan/10 p-6 md:p-10 hover:border-neon-pink/50 transition-all duration-300 hover:-translate-y-0.5">
+        <!-- Animated glow layers -->
+        <div class="absolute -top-20 -right-20 w-60 h-60 bg-neon-pink rounded-full blur-[100px] opacity-20 animate-pulse-glow"></div>
+        <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-neon-cyan rounded-full blur-[100px] opacity-20 animate-pulse-glow" style="animation-delay: 1s"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,20,147,0.08),transparent_60%)]"></div>
+        
+        <div class="relative z-10">
+          <!-- Top badge row -->
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-neon-pink/20 border border-neon-pink/40 text-neon-pink text-xs font-bold uppercase tracking-widest animate-pulse-glow">
+              <i class="fa-solid fa-rocket"></i> Launch Special
+            </span>
+            <span class="text-xs text-muted">Limited time</span>
           </div>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-3 mb-0.5">
-              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/30 uppercase tracking-wider">
-                🚀 Launch Special
-              </span>
-              <span class="text-xs text-muted">Limited time</span>
-            </div>
-            <p class="text-sm md:text-base text-white font-medium">
-              Sign up for a <strong class="gradient-text">free account</strong> and get automatically upgraded to 
-              <strong class="text-neon-cyan">Premium</strong> — first 500 only.
+
+          <!-- Main headline -->
+          <div class="text-center mb-6">
+            <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-3">
+              <span class="gradient-text">Free Premium</span>
+              <span class="text-white"> for the First</span>
+              <br class="hidden sm:block" />
+              <span class="text-neon-cyan">500 Members</span>
+            </h2>
+            <p class="text-muted text-sm md:text-base max-w-xl mx-auto">
+              Sign up for a <strong class="text-white">free account</strong> and get automatically upgraded to 
+              <strong class="text-neon-cyan">Premium</strong> — zero cost, keep it forever. Just early supporter perks.
             </p>
           </div>
-          <div class="shrink-0">
-            <div class="text-center">
-              <span class="text-2xl font-bold text-neon-cyan" id="home-spots">500</span>
-              <p class="text-[10px] text-muted uppercase tracking-wider">Spots left</p>
+
+          <!-- CTA + Counter row -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div class="inline-flex items-center gap-3 bg-white/5 rounded-xl px-6 py-3 border border-white/10">
+              <div class="text-center">
+                <span class="text-3xl md:text-4xl font-black text-neon-cyan" id="home-spots">500</span>
+                <p class="text-xs text-muted uppercase tracking-wider mt-0.5">Spots Left</p>
+              </div>
+              <div class="w-px h-10 bg-white/10"></div>
+              <div class="text-center">
+                <span class="text-3xl md:text-4xl font-black text-neon-pink">0</span>
+                <p class="text-xs text-muted uppercase tracking-wider mt-0.5">Claimed</p>
+              </div>
+            </div>
+            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-neon-pink to-neon-purple text-white px-8 py-3.5 rounded-xl font-semibold text-sm hover:opacity-90 transition-all glow-pink group-hover:scale-105 transition-transform">
+              Claim Your Premium <i class="fa-solid fa-arrow-right ml-1"></i>
             </div>
           </div>
-          <i class="fa-solid fa-chevron-right text-muted group-hover:text-white transition-colors hidden sm:block"></i>
         </div>
       </div>
     </a>
