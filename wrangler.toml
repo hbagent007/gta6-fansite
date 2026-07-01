@@ -2,3 +2,16 @@ name = "gta6-fansite"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-06-28"
 compatibility_flags = ["nodejs_compat"]
+
+# KV namespace for Astro sessions (create in Cloudflare Dashboard first)
+# kv_namespaces = [
+#   { binding = "SESSION", id = "<your-kv-id>" }
+# ]
+
+# Environment variables from .env are auto-injected by wrangler (for dev)
+# For Cloudflare Pages deployment, set these in the dashboard:
+# - X_API_KEY, X_API_KEY_SECRET, X_BEARER_TOKEN, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+# - PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY
+# - STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY, STRIPE_WEBHOOK_SECRET
+# - STRIPE_PREMIUM_PRICE_ID, STRIPE_ELITE_PRICE_ID
+# - SUPABASE_URL, SUPABASE_SERVICE_KEY

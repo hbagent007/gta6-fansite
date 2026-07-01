@@ -7,11 +7,14 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && mkdir -p dist/client/functions && npx wrangler pages functions build dist/server --outdir dist/client/functions --build-output-directory dist/client",
+    "build:worker": "astro build && node -e \"require('esbuild').build({entryPoints:['dist/server/entry.mjs'],outfile:'dist/client/_worker.js',bundle:true,format:'esm',target:'es2022',platform:'browser',external:['cloudflare:*'],allowOverwrite:true})\"",
+    "deploy": "npm run build:worker && npx wrangler pages deploy dist/client --project-name gta6-fansite --no-bundle",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^14.0.1",
     "@stripe/stripe-js": "^9.8.0",
     "@supabase/supabase-js": "^2.108.2",
     "@tailwindcss/vite": "^4.3.1",
